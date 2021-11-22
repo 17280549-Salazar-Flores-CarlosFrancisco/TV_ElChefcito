@@ -1,30 +1,51 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .nav.navbar-nav li a {
+            color: white;
+        }
+
+        .navbar-brand {
+            color: white !important;
+        }
+    </style>
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <header class="py-5">
+        <div class="thumbnail">
+            <img class="img-responsive" src="~/Content/img/banner2.png" alt="..."/ >
+            <div class="centered" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); ">
+                <h1 class="display-4 fw-bolder" style="color: white;"> Distribuidores Chefcito</h1>
+                <p class="lead fw-normal text-white-50 mb-0" style="color: white;"> Equipa tu cocina con los mejores utensilios</p>
+            </div>
+        </div>
+    </header>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="height: 32px; background-color: rgba(255, 0, 0, 0.7);">
         <div class="container">
-            <div class="navbar-header">
+            <div class="navbar-header pull-left">
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                    <img class="img-circle" src="~/Content/img/Logo.png" alt="Site Logo" style="height: 32px; width: 32px; width: 32px;" / >
+                </a>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <span class="icon-bar"> </span>
+                    <span class="icon-bar"> </span>
+                    <span class="icon-bar"> </span>
                 </button>
-                @Html.ActionLink("Nombre de aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Distribuidoras Chefcito", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Inicio", "Index", "Home") </li>
+                    <li>@Html.ActionLink("Acerca de", "About", "Home") </li>
+                    <li>@Html.ActionLink("Contacto", "Contact", "Home") </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -32,12 +53,15 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+        <hr / >
+        <footer style="background-color: #6e0516; color: #ffffff; height: 100px;">
+            <br / >
+            <center> <strong> &copy; @DateTime.Now.Year - Distribuidoras Chefcito 2021 S.A de C.V</strong> </center>
+            <br / >
+            <center> <strong> Equipo 1 - Ecommerce</strong> </center>
+
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
