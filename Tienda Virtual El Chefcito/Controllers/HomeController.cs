@@ -10,6 +10,7 @@ namespace Tienda_Virtual_El_Chefcito.Controllers
     {
         public ActionResult Index()
         {
+            //Comentario agregado por Carlos desde la Rama "main"
             return View();
         }
 
