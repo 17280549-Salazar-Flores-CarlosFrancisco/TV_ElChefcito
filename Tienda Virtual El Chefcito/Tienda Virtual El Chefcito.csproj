@@ -189,6 +189,9 @@
     <Content Include="Content\img\Cate3.jpg" />
     <Content Include="Content\img\Cate4.jpg" />
     <Content Include="Content\img\Logo.png" />
+    <Content Include="Content\img\Panel1.png" />
+    <Content Include="Content\img\Panel2.png" />
+    <Content Include="Content\img\Panel3.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

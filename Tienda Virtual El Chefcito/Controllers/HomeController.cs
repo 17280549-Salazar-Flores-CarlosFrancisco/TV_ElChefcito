@@ -14,8 +14,6 @@ namespace Tienda_Virtual_El_Chefcito.Controllers
             //Comentario 2 agregado por Carlos desde la Rama "main   [Commit 2]"
 
             //[Commit 3] Cambio hecho por Carlos desde la Rama "main (Ya solo se actualiza el código)"
-
-            //Pruebba con la rama de Carlos
             return View();
         }
 
