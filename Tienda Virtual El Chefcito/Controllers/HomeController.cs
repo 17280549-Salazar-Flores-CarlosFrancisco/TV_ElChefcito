@@ -11,6 +11,7 @@ namespace Tienda_Virtual_El_Chefcito.Controllers
         public ActionResult Index()
         {
             //Comentario agregado por Carlos desde la Rama "main"
+            //Comentario 2 agregado por Carlos desde la Rama "main   [Commit 2]"
             return View();
         }
 
