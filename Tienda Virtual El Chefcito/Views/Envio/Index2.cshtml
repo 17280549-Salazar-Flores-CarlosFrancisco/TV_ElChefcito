@@ -1,0 +1,116 @@
+﻿@model IEnumerable<Almacenista.Models.Envios>
+
+@{
+    ViewBag.Title = "Detalles Envíos";
+    Layout = "~/Views/Shared/_LayoutAlmacenista.cshtml";
+}
+
+<h2>Pedidos Enviados y con Fecha de Entrega</h2>
+<style>
+
+    .btn-primary > a {
+        text-decoration: none;
+        color: white;
+    }
+
+    .btn-warning > a {
+        text-decoration: none;
+        color: white;
+    }
+
+    .btn-danger > a {
+        text-decoration: none;
+        color: white;
+    }
+</style>
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h4>Envíos</h4>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                <p>Número de Orden</p>
+            </th>
+            <th>
+                <p>Contacto</p>
+            </th>
+            <th>
+                <p>Número de Guía</p>
+            </th>
+            <th>
+                <p>Dirección</p>
+            </th>
+            <th>
+                <p>Estado</p>
+            </th>
+            <th>
+                <p>Fecha de Envío</p>
+            </th>
+            <th>
+                <p>Fecha de Entrega</p>
+            </th>
+            <th>
+                <p>Paquetería</p>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            string val;
+            string val2;
+            if (item.fecha_envio.HasValue && item.fecha_entrega.HasValue)
+            {
+                val = item.fecha_envio.GetValueOrDefault().ToShortDateString();
+                val2 = item.fecha_entrega.GetValueOrDefault().ToShortDateString();
+            }
+            else
+            {
+                val = "";
+                val2 = "";
+            }
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id_envio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.contacto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.numero_guia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.direccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estatus)
+                </td>
+                <td>
+                    @Html.TextAreaFor(modelItem => item.fecha_envio,new {@class="form-control",@Value=val,@readonly="readonly"})
+                </td>
+                <td>
+                    @Html.TextAreaFor(modelItem => item.fecha_entrega, new { @class = "form-control", @Value = val2, @readonly = "readonly" })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Paqueterias.nombre)
+                </td>
+                <td>
+                    
+                    <div class="text-center" style="text-emphasis-color:white">
+                        <span>
+                            <button class="btn btn-warning btn-sm">
+                                <span class="glyphicon glyphicon-plus"></span>@Html.ActionLink("Detalles", "Details2", new { id = item.id_envio })
+                            </button>
+                        </span>
+                    </div>
+</td>
+            </tr>
+        }
+
+    </table>
+    </div>
+
+
+
