@@ -1,0 +1,107 @@
+﻿@model Almacenista.Models.Paqueterias
+
+@{
+    ViewBag.Title = "Eliminar Paquetería";
+    Layout = "~/Views/Shared/_LayoutAlmacenista.cshtml";
+}
+
+<h2>Eliminar</h2>
+<style>
+
+    .btn-primary > a {
+        text-decoration: none;
+        color: white;
+    }
+
+    .btn-warning > a {
+        text-decoration: none;
+        color: white;
+    }
+
+    .btn-danger > a {
+        text-decoration: none;
+        color: white;
+    }
+</style>
+<h3>¿Está seguro que desea eliminar esta paquetería?</h3>
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        <h4>Categorias</h4>
+    </div>
+    <div class="panel-body" >
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.razon_social)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.razon_social)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.rfc)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.rfc)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.pagina_web)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.pagina_web)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.direccion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.direccion)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.telefono)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.telefono)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.estatus)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.estatus)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <div class="col-md-offset-5 col-md-7">
+                <button type="submit" value="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>Eliminar</button> |
+                <span>
+                    <button class="btn btn-primary btn-sm">
+                        <span class="glyphicon glyphicon-backward"></span>@Html.ActionLink("Ver Paqueterías", "Index")
+                    </button>
+                </span>
+            </div>
+            </div>
+            }
+        </div>
+    </div>

@@ -1,0 +1,111 @@
+﻿@model IEnumerable<Almacenista.Models.Paqueterias>
+
+@{
+    ViewBag.Title = "Listado de Paqueterías";
+    Layout = "~/Views/Shared/_LayoutAlmacenista.cshtml";
+
+}
+
+<h2>Todas las Paqueterías</h2>
+<style>
+
+    .btn-primary > a {
+        text-decoration: none;
+        color: white;
+    }
+
+    .btn-warning > a {
+        text-decoration: none;
+        color: white;
+    }
+
+    .btn-danger > a {
+        text-decoration: none;
+        color: white;
+    }
+</style>
+<p>
+    <span>
+        <button class="btn btn-warning btn-sm">
+            <span class="glyphicon glyphicon-plus"></span>@Html.ActionLink("Agregar Paquetería", "Create")
+        </button>
+    </span>
+</p>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h4>Paqueterías</h4>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                <p>Nombre</p>
+            </th>
+            <th>
+                <p>Razón Social</p>
+            </th>
+            <th>
+                <p>RFC</p>
+            </th>
+            <th>
+                <p>Página web</p>
+            </th>
+            <th>
+                <p>Dirección</p>
+            </th>
+            <th>
+                <p>Teléfono</p>
+            </th>
+            <th>
+                <p>Estado</p>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.razon_social)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.rfc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pagina_web)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.direccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estatus)
+                </td>
+                <td>
+                    <div class="text-center" style="text-emphasis-color:white">
+                        <span>
+                            <button class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-edit"></span>@Html.ActionLink("Editar", "Edit", new { id = item.id_paqueteria })
+                            </button>
+                        </span>
+                        <span>
+                            <button class="btn btn-warning btn-sm">
+                                <span class="glyphicon glyphicon-plus"></span>@Html.ActionLink("Detalles", "Details", new { id = item.id_paqueteria })
+                            </button>
+                        </span>
+                        <span>
+                            <button class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span>@Html.ActionLink("Eliminar", "Delete", new { id = item.id_paqueteria })</button>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+

@@ -1,0 +1,253 @@
+﻿@model Almacenista.Models.Envios
+
+@{
+    ViewBag.Title = "Editar Fecha de Entrega";
+    Layout = "~/Views/Shared/_LayoutAlmacenista.cshtml";
+}
+@{string val;
+    if (Model.fecha_envio.HasValue)
+    {
+        val = Model.fecha_envio.GetValueOrDefault().ToShortDateString();
+    }
+    else
+    {
+        val = "";
+    }
+
+}
+<h2>Actualizar Fecha de Entrega</h2>
+
+<script>
+    $(this).submit(function (event) {
+        event.preventDefault();
+        var fE;
+        var fN;
+        var nada = "";
+        var i = $('#@Html.IdFor(m => m.fecha_entrega)').val();
+        if (i != "") {
+            fT = i.split('-');
+            fE = fT[2] + "/" + fT[1] + "/" + fT[0];
+
+            var fechaEntrega = Date.parse(i);
+        }
+        else
+        {
+            nada = "nada";
+            fE = "";
+        }
+        var fEnv = $('#@Html.IdFor(m => m.fecha_envio)').val();
+        fN = fEnv.split('/');
+        if (nada == "nada") {
+            $("#1").text("No ha seleccionado ninguna fecha de entrega");
+            $('#popupModel').modal('show');
+        } else {
+            var fechaEnvio = Date.parse(fN[2] + '-' + fN[1] + '-' + fN[0]);
+            if (fechaEnvio > fechaEntrega)
+            {
+                $("#1").text("La fecha de entrega: " + fE + " no puede ser menor");
+                $("#2").text(" a la de envío: " + fEnv);
+                $('#popupModel').modal('show');
+            }
+            else {
+                Save();
+            }
+        }
+    });
+    function Save() {
+        var token = $("[name='__RequestVerificationToken']").val();
+
+        var EnviosModel = {
+            id_envio: $('#@Html.IdFor(m => m.id_envio)').val(),
+            contacto: $('#@Html.IdFor(m => m.contacto)').val(),
+            numero_guia: $('#@Html.IdFor(m => m.numero_guia)').val(),
+            direccion: $('#@Html.IdFor(m => m.direccion)').val(),
+            estatus: $('#@Html.IdFor(m => m.estatus)').val(),
+            fecha_envio: $('#@Html.IdFor(m => m.fecha_envio)').val(),
+            fecha_entrega: $('#@Html.IdFor(m => m.fecha_entrega)').val(),
+            id_paqueteria: $('#@Html.IdFor(m => m.Paqueterias)').val(),
+            id_detalle_venta: $('#@Html.IdFor(m => m.Detalle_venta)').val(),
+            __RequestVerificationToken: token
+        }
+        $.ajax({
+            type: "post",
+            url: "/Envio/Edit1",
+            data: EnviosModel,
+            async: false,
+            datatype: "json",
+            success: function (result) {
+                $('form').attr('action', 'Index1');
+                $('form').submit();
+            },
+            error: function (err, result) {
+                alert('No Valid Data' + err.responseText);
+            }
+        });
+    }
+</script>
+
+<style>
+
+    .btn-primary > a {
+        text-decoration: none;
+        color: white;
+    }
+
+    .btn-warning > a {
+        text-decoration: none;
+        color: white;
+    }
+
+    .btn-danger > a {
+        text-decoration: none;
+        color: white;
+    }
+</style>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h4>Envíos</h4>
+    </div>
+    <div class="panel-body">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id_envio)
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-offset-2">
+                    @Html.LabelFor(model => model.id_envio, "Número de Orden", htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.id_envio, new { @class = "form-control", @Value = Model.id_envio, @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.id_envio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-offset-2">
+                    @Html.LabelFor(model => model.contacto, "Contacto", htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.contacto, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.contacto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-offset-2">
+                    @Html.LabelFor(model => model.numero_guia, "Número de Guía", htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.numero_guia, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.numero_guia, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-offset-2">
+                    @Html.LabelFor(model => model.direccion, "Dirección", htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.direccion, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.direccion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-offset-2">
+                    @Html.LabelFor(model => model.estatus, "Estado:", htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-md-2">
+                    @Html.RadioButtonFor(model => model.estatus, "1")<label for="1">Enviado</label>
+                    @Html.ValidationMessageFor(model => model.estatus, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-2">
+                    @Html.RadioButtonFor(model => model.estatus, "0")<label for="0">No Enviado</label>
+                    @Html.ValidationMessageFor(model => model.estatus, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-offset-2">
+                    @Html.LabelFor(model => model.fecha_envio, "Fecha de Envío", htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.fecha_envio, new { @class = "form-control", @Value = Model.fecha_envio, @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.fecha_envio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-offset-2">
+                    @Html.LabelFor(model => model.fecha_entrega, "Fecha de Entrega", htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.fecha_entrega, new { @type = "date", @class = "form-control datepicker" })
+                    @Html.ValidationMessageFor(model => model.fecha_entrega, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-offset-2">
+                    @Html.LabelFor(model => model.id_paqueteria, "Paquetería", htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.Paqueterias.nombre, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.id_paqueteria, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-5 col-md-7">
+                <button id="guardar" type="submit" value="Guardar" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span>Actualizar</button>
+            </div>
+        </div>
+    </div>
+            </div>
+    }
+<div id="popupModel" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Error en la Fecha</h3>
+                <button type="button" class="close" data-dismiss="modal">X</button>
+            </div>
+            <div style="padding:5px;">
+                <div style="background-color:skyblue;padding-left:15px">
+                    <span id="1"></span> <span id="2"></span>
+                </div>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center">
+    <span>
+        <button class="btn btn-primary btn-sm">
+            <span class="glyphicon glyphicon-backward"></span>@Html.ActionLink("Ver Envíos", "Index1")
+        </button>
+    </span>
+</div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

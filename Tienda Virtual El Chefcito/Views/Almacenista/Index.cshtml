@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Almacenista";
+    Layout = "~/Views/Shared/_LayoutAlmacenista.cshtml";
+}
+
+@{
+    string name = @Session["usr"].ToString();
+}
+<div class="container" style="background-color:darkseagreen">
+    <h1 style="background-color:mediumpurple;text-align:center">Distribuidoras Chefcito</h1>
+
+    <p class="lead">¡Bienvenido almacenista @name !</p>
+    <div style="align-content:center">
+        <img src="~/Content/chefsito.jpeg" />
+        <p class="lead">¡Nos gusta verte feliz!</p>
+    </div>
+</div>
+
