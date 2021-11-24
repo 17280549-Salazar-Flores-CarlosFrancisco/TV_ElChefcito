@@ -1,0 +1,41 @@
+﻿@using Tienda_Virtual_El_Chefcito.Models
+@{
+    ViewBag.Title = "subCategorias";
+    Layout = "~/Views/Shared/_LayoutCompras.cshtml";
+}
+
+<h2>Le mostramos todas nuestras subCategorias</h2>
+<div class="container" style="padding-top: 10px;">
+    @Html.ActionLink("Producto", "productos", "Catalogo", new { @class = "btn" })
+    @Html.ActionLink("Categoria", "categorias", "Catalogo", new { @class = "btn" })
+    @Html.ActionLink("Subcategoria", "subCategorias", "Catalogo", new { @class = "btn" })
+
+</div>
+<br />
+<div class="container" style="padding-top: 10px;">
+    <div class="row">
+        @foreach (Subcategorias item in ViewBag.SubCatego)
+        {
+            <div class="col-xs-3">
+                <div>
+                    <div class="panel panel-default" style="text-align: center; padding: 10px; background-color: lemonchiffon;">
+                        <div class="panel-body">
+                            <h3>@item.nombre</h3>
+                            <a>
+                                <img class="img-responsive rounded border-1" src="~/Content/img/@item.imagen" />
+                            </a>
+                            <p style="padding-top: 10px;">
+                                $ @item.descripcion
+                            </p>
+                            <div class="row">
+                                <a class="btn btn-primary"
+                                   href="@Url.Action("prodSubCategoria", "Catalogo", new { idCat = item.id_subcategoria })">Ir a Sub Categoría</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChefcitoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Categorias">
+    <Key>
+      <PropertyRef Name="id_categoria" />
+    </Key>
+    <Property Name="id_categoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="imagen" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estatus" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Subcategorias" Relationship="Self.FK__Subcatego__id_ca__4AB81AF0" FromRole="Categorias" ToRole="Subcategorias" />
+  </EntityType>
+  <EntityType Name="Comentario">
+    <Key>
+      <PropertyRef Name="id_comentario" />
+    </Key>
+    <Property Name="id_comentario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="titulo" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="descripcion" Type="String" MaxLength="180" FixedLength="false" Unicode="false" />
+    <Property Name="fecha" Type="DateTime" Precision="0" />
+    <Property Name="respuesta" Type="String" MaxLength="180" FixedLength="false" Unicode="false" />
+    <Property Name="id_usuario" Type="Int32" />
+    <Property Name="id_envio" Type="Int32" />
+    <Property Name="estatus" Type="Int32" />
+    <NavigationProperty Name="Envios" Relationship="Self.FK__Comentari__id_en__02FC7413" FromRole="Comentario" ToRole="Envios" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK__Comentari__id_us__03F0984C" FromRole="Comentario" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Detalle_Venta">
+    <Key>
+      <PropertyRef Name="id_detalle_venta" />
+    </Key>
+    <Property Name="id_detalle_venta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="subtotal" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="iva" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="total" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="estatus" Type="Int32" />
+    <Property Name="costo_envio" Type="Decimal" Precision="5" Scale="2" />
+    <NavigationProperty Name="Envios" Relationship="Self.FK__Envios__id_detal__04E4BC85" FromRole="Detalle_Venta" ToRole="Envios" />
+    <NavigationProperty Name="Venta" Relationship="Self.FK__Venta__id_detall__6C190EBB" FromRole="Detalle_Venta" ToRole="Venta" />
+  </EntityType>
+  <EntityType Name="Envios">
+    <Key>
+      <PropertyRef Name="id_envio" />
+    </Key>
+    <Property Name="id_envio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="contacto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="numero_guia" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="direccion" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estatus" Type="Int32" Nullable="false" />
+    <Property Name="fecha_envio" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="fecha_entrega" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="id_paqueteria" Type="Int32" Nullable="false" />
+    <Property Name="id_detalle_venta" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Comentario" Relationship="Self.FK__Comentari__id_en__02FC7413" FromRole="Envios" ToRole="Comentario" />
+    <NavigationProperty Name="Detalle_Venta" Relationship="Self.FK__Envios__id_detal__04E4BC85" FromRole="Envios" ToRole="Detalle_Venta" />
+    <NavigationProperty Name="Paqueterias" Relationship="Self.FK__Envios__id_paque__47DBAE45" FromRole="Envios" ToRole="Paqueterias" />
+  </EntityType>
+  <EntityType Name="Paqueterias">
+    <Key>
+      <PropertyRef Name="id_paqueteria" />
+    </Key>
+    <Property Name="id_paqueteria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="razon_social" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="rfc" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pagina_web" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="direccion" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estatus" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Envios" Relationship="Self.FK__Envios__id_paque__47DBAE45" FromRole="Paqueterias" ToRole="Envios" />
+  </EntityType>
+  <EntityType Name="Productos">
+    <Key>
+      <PropertyRef Name="id_producto" />
+    </Key>
+    <Property Name="id_producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="marca" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="descripcion" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="existencia" Type="Int32" Nullable="false" />
+    <Property Name="precio_venta" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="stock" Type="Int32" Nullable="false" />
+    <Property Name="id_subcategoria" Type="Int32" Nullable="false" />
+    <Property Name="estatus" Type="Int32" Nullable="false" />
+    <Property Name="imagen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Subcategorias" Relationship="Self.FK__Productos__id_su__07C12930" FromRole="Productos" ToRole="Subcategorias" />
+    <NavigationProperty Name="Venta" Relationship="Self.FK__Venta__id_produc__08B54D69" FromRole="Productos" ToRole="Venta" />
+  </EntityType>
+  <EntityType Name="Subcategorias">
+    <Key>
+      <PropertyRef Name="id_subcategoria" />
+    </Key>
+    <Property Name="id_subcategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="imagen" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estatus" Type="Int32" Nullable="false" />
+    <Property Name="id_categoria" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Categorias" Relationship="Self.FK__Subcatego__id_ca__4AB81AF0" FromRole="Subcategorias" ToRole="Categorias" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK__Productos__id_su__07C12930" FromRole="Subcategorias" ToRole="Productos" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="rol" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estatus" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Comentario" Relationship="Self.FK__Comentari__id_us__03F0984C" FromRole="Usuarios" ToRole="Comentario" />
+    <NavigationProperty Name="Venta" Relationship="Self.FK__Venta__id_usuari__6E01572D" FromRole="Usuarios" ToRole="Venta" />
+  </EntityType>
+  <EntityType Name="Venta">
+    <Key>
+      <PropertyRef Name="id_venta" />
+    </Key>
+    <Property Name="id_venta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fecha_venta" Type="DateTime" Precision="0" />
+    <Property Name="cantidad" Type="Int32" />
+    <Property Name="precio_venta" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="estatus" Type="Int32" />
+    <Property Name="id_producto" Type="Int32" />
+    <Property Name="id_usuario" Type="Int32" />
+    <Property Name="id_detalle_venta" Type="Int32" />
+    <NavigationProperty Name="Detalle_Venta" Relationship="Self.FK__Venta__id_detall__6C190EBB" FromRole="Venta" ToRole="Detalle_Venta" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK__Venta__id_produc__08B54D69" FromRole="Venta" ToRole="Productos" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK__Venta__id_usuari__6E01572D" FromRole="Venta" ToRole="Usuarios" />
+  </EntityType>
+  <Association Name="FK__Subcatego__id_ca__4AB81AF0">
+    <End Role="Categorias" Type="Self.Categorias" Multiplicity="1" />
+    <End Role="Subcategorias" Type="Self.Subcategorias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorias">
+        <PropertyRef Name="id_categoria" />
+      </Principal>
+      <Dependent Role="Subcategorias">
+        <PropertyRef Name="id_categoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comentari__id_en__02FC7413">
+    <End Role="Envios" Type="Self.Envios" Multiplicity="0..1" />
+    <End Role="Comentario" Type="Self.Comentario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Envios">
+        <PropertyRef Name="id_envio" />
+      </Principal>
+      <Dependent Role="Comentario">
+        <PropertyRef Name="id_envio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comentari__id_us__03F0984C">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <End Role="Comentario" Type="Self.Comentario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="Comentario">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Envios__id_detal__04E4BC85">
+    <End Role="Detalle_Venta" Type="Self.Detalle_Venta" Multiplicity="1" />
+    <End Role="Envios" Type="Self.Envios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Detalle_Venta">
+        <PropertyRef Name="id_detalle_venta" />
+      </Principal>
+      <Dependent Role="Envios">
+        <PropertyRef Name="id_detalle_venta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Venta__id_detall__6C190EBB">
+    <End Role="Detalle_Venta" Type="Self.Detalle_Venta" Multiplicity="0..1" />
+    <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Detalle_Venta">
+        <PropertyRef Name="id_detalle_venta" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="id_detalle_venta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Envios__id_paque__47DBAE45">
+    <End Role="Paqueterias" Type="Self.Paqueterias" Multiplicity="1" />
+    <End Role="Envios" Type="Self.Envios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paqueterias">
+        <PropertyRef Name="id_paqueteria" />
+      </Principal>
+      <Dependent Role="Envios">
+        <PropertyRef Name="id_paqueteria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Productos__id_su__07C12930">
+    <End Role="Subcategorias" Type="Self.Subcategorias" Multiplicity="1" />
+    <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subcategorias">
+        <PropertyRef Name="id_subcategoria" />
+      </Principal>
+      <Dependent Role="Productos">
+        <PropertyRef Name="id_subcategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Venta__id_produc__08B54D69">
+    <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+    <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Productos">
+        <PropertyRef Name="id_producto" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="id_producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Venta__id_usuari__6E01572D">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="contextTienda" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categorias" EntityType="Self.Categorias" />
+    <EntitySet Name="Comentario" EntityType="Self.Comentario" />
+    <EntitySet Name="Detalle_Venta" EntityType="Self.Detalle_Venta" />
+    <EntitySet Name="Envios" EntityType="Self.Envios" />
+    <EntitySet Name="Paqueterias" EntityType="Self.Paqueterias" />
+    <EntitySet Name="Productos" EntityType="Self.Productos" />
+    <EntitySet Name="Subcategorias" EntityType="Self.Subcategorias" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+    <EntitySet Name="Venta" EntityType="Self.Venta" />
+    <AssociationSet Name="FK__Subcatego__id_ca__4AB81AF0" Association="Self.FK__Subcatego__id_ca__4AB81AF0">
+      <End Role="Categorias" EntitySet="Categorias" />
+      <End Role="Subcategorias" EntitySet="Subcategorias" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comentari__id_en__02FC7413" Association="Self.FK__Comentari__id_en__02FC7413">
+      <End Role="Envios" EntitySet="Envios" />
+      <End Role="Comentario" EntitySet="Comentario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comentari__id_us__03F0984C" Association="Self.FK__Comentari__id_us__03F0984C">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Comentario" EntitySet="Comentario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Envios__id_detal__04E4BC85" Association="Self.FK__Envios__id_detal__04E4BC85">
+      <End Role="Detalle_Venta" EntitySet="Detalle_Venta" />
+      <End Role="Envios" EntitySet="Envios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Venta__id_detall__6C190EBB" Association="Self.FK__Venta__id_detall__6C190EBB">
+      <End Role="Detalle_Venta" EntitySet="Detalle_Venta" />
+      <End Role="Venta" EntitySet="Venta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Envios__id_paque__47DBAE45" Association="Self.FK__Envios__id_paque__47DBAE45">
+      <End Role="Paqueterias" EntitySet="Paqueterias" />
+      <End Role="Envios" EntitySet="Envios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Productos__id_su__07C12930" Association="Self.FK__Productos__id_su__07C12930">
+      <End Role="Subcategorias" EntitySet="Subcategorias" />
+      <End Role="Productos" EntitySet="Productos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Venta__id_produc__08B54D69" Association="Self.FK__Venta__id_produc__08B54D69">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="Venta" EntitySet="Venta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Venta__id_usuari__6E01572D" Association="Self.FK__Venta__id_usuari__6E01572D">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Venta" EntitySet="Venta" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

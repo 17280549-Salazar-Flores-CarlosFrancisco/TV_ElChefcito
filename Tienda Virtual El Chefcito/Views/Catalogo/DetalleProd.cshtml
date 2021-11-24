@@ -1,0 +1,66 @@
+﻿@using Tienda_Virtual_El_Chefcito.Models
+@{
+    ViewBag.Title = "DetalleProd";
+    Layout = "~/Views/Shared/_LayoutCompras.cshtml";
+}
+
+<h2>Detalle de producto</h2>
+
+<div class="container" style="padding-top: 10px;">
+    @Html.ActionLink("Producto", "productos", "Catalogo", new { @class = "btn" })
+    @Html.ActionLink("Categoria", "categorias", "Catalogo", new { @class = "btn" })
+    @Html.ActionLink("Subcategoria", "subCategorias", "Catalogo", new { @class = "btn" })
+
+</div>
+<br />
+
+<div class="container" style="padding-top: 10px;">
+    <div class="row" style="padding: 10px; background-color: lemonchiffon;">
+
+        @foreach (Productos item in ViewBag.Listado)
+        {
+            <div class="col-xs-5">
+                <div class="container-fluid">
+                    <img class="img-responsive rounded border-0" src="~/Content/img/@item.imagen" />
+                </div>
+            </div>
+
+            <div class="col-xs-6">
+                <div>
+                    <div class="row">
+                        <h1 class="control-label">@item.nombre</h1>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col control-label" style="width: 100px; padding-right: 5px">Descripción</label>
+
+                            <h4 class="col">
+                                @item.descripcion
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Marca</label>
+                            <h4>@item.marca</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Precio</label>
+                            <h4>
+                                $ @item.precio_venta
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @Html.ActionLink("Volver", "productos", "Catalogo", new { id = item.id_producto }, new { @class = "btn btn-warning" })
+                        @Html.ActionLink("Añadir a carrito", "Agregar", "AnonCarrito", new { id = item.id_producto }, new { @class = "btn btn-success" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
