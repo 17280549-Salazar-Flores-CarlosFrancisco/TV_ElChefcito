@@ -1,0 +1,65 @@
+﻿@model VistasAct3.Models.Categorias
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutCompras.cshtml";
+}
+
+<h2>Eliminar</h2>
+<style>
+    .btn-primary > a {
+        text-decoration: none;
+        color: white;
+    }
+</style>
+<h3 style="color:#8e1212">¿Seguro que deseas eliminar la categoria?</h3>
+<div>
+    <hr />
+    <div class="panel panel-danger">
+        <div class="panel-heading"><h4 style="font-weight:bold">Detalles de categoría</h4></div>
+        <div class="panel-body">
+            <table class="table table-striped table-hover table-bordered">
+                <tr>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Descripción
+                    </th>
+                    <th>
+                        Imagen
+                    </th>
+                    <th>
+                        Estatus
+                    </th>
+                </tr>
+
+                <tr>
+                    <th>
+                        @Html.DisplayFor(model => model.nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayFor(model => model.descripcion)
+                    </th>
+                    <th>
+                        <img src="~/Content/img/@Html.DisplayFor(model => model.imagen)" alt="Imagen aqui" width="80" />
+
+                    </th>
+                    <th>
+                        @Html.DisplayFor(model => model.estatus)
+                    </th>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="row">
+        <button class="btn btn-danger col-md-2 "><span class="glyphicon glyphicon-list-alt"></span> <a href="/Categorias" style="text-decoration: none; color:white"> Cancelar</a> </button>
+        <button type="submit" value="Delete" class="btn btn-warning col-md-2 col-md-offset-1"><span class="glyphicon glyphicon-trash"></span> Eliminar</button>
+    </div>
+    }
+</div>
