@@ -1,0 +1,64 @@
+﻿@using Actividad3Vistas.Models
+@{
+    ViewBag.Title = "PagoPayPal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<br />
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h2 class="panel-title"><b><i class="glyphicon glyphicon-info-sign"></i> Pagar con PayPal</b></h2>
+    </div>
+    <div class="panel-body">
+        <strong>Hola @ViewBag.nombrecliente favor de ingresar la contraseña de su cuenta de PayPal con el email de:  @ViewBag.emailcliente</strong>
+        <div align="center">
+            <img src="~/Content/img/tarjetas/paypal.png" alt="Image goes here" />
+        </div>
+        <div class="col-lg-offset-4">
+            @using (Html.BeginForm("VerifyPayPal", "Pagar", FormMethod.Post))
+            {
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        @Html.Label("Contraseña")
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="glyphicon glyphicon-lock"></i>
+                            </div>
+                            @Html.Editor("pwd", new { htmlAttributes = new { @class = "form-control", @type = "password", @pattern = "[A-Za-z0-9]{3,20}", @requiered = "true"  } })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <button class="btn btn-success" type="submit" value="Create"><i class="glyphicon glyphicon-credit-card"></i> Pagar</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="panel panel-warning">
+    <div class="panel-body">
+        <div align="center">
+            @{
+                List<Item> cart = (List<Item>)Session["cart"];
+                var total = cart.Sum(item => item.Producto.precio_venta * item.Cantidad);
+            }
+            <table class="table" style="width: 400px;">
+                <tr>
+                    <td><strong>Subtotal:</strong></td>
+                    <td><strong>$@total</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Precio de envío:</strong></td>
+                    <td><strong>$200.00</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Total:</strong></td>
+                    <td><strong>$@(total = total + 200)</strong></td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</div>

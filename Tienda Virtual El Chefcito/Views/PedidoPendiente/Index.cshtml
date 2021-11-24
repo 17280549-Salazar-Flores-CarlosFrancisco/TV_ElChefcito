@@ -1,0 +1,81 @@
+﻿@using Actividad3Vistas.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    a {
+        text-decoration: none;
+        color: white;
+    }
+</style>
+<div class="container">
+    <div align="center">
+        <h2>Mis pedidos pendientes</h2>
+    </div>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Nombre de Producto</th>
+                <th>Cantidad</th>
+                <th class="text-center">Fecha de Envío</th>
+                <th class="text-center">Fecha Estimada de Entrega</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ListaPedidoPendiente lpp in ViewBag.pedidospen)
+            {
+                var fecha_entrega = "Sin fecha de entrega asignada";
+                var fecha_envio = "Sin fecha de envío asignada";
+                if (lpp.envio.fecha_entrega != null && lpp.envio.fecha_envio != null)
+                {
+                     fecha_entrega = lpp.envio.fecha_entrega.GetValueOrDefault().ToShortDateString();
+                    fecha_envio = lpp.envio.fecha_envio.GetValueOrDefault().ToShortDateString();
+                }
+                else
+                {
+
+                }
+
+                <tr>
+                    <td class="col-md-3">
+                        <div class="media">
+                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="~/Content/img/products/@lpp.producto.imagen"> </a>
+                        </div>
+                    </td>
+                    <td class="col-md-1">
+                        <strong>@lpp.producto.nombre</strong>
+                    </td>
+                    <td class="col-md-1 col-md-1 col-sm-1" style="text-align:center;">
+                       <strong>@lpp.ventas.cantidad</strong>
+                    </td>
+                    <td class="col-md-2 text-center">
+                       
+                     <strong>@fecha_envio</strong>
+                        
+                    </td>
+                    <td class="col-md-2 text-center">
+                       
+                     <strong>@fecha_entrega</strong>
+                        
+                    </td>
+                    <td class="col-md-1">
+                        <strong>@lpp.ventas.precio_venta</strong>
+                    </td>
+                    <td class="col-md-2">
+                        <button class="btn btn-primary"> <i class="glyphicon glyphicon-info-sign"></i><a href="@Url.Action("Details","PedidoPendiente", new { idP= lpp.producto.id_producto, cant = lpp.ventas.cantidad, fechE = fecha_entrega, total = lpp.ventas.precio_venta})"> Ver detalles</a></button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="text-left">
+        <button class="btn btn-primary"><i class="glyphicon glyphicon-home"></i> Regresar al Home</button>
+    </div>
+</div>
+
+
+

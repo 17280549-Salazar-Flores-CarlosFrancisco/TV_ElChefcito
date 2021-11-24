@@ -1,22 +1,54 @@
 ﻿@using Microsoft.AspNet.Identity
+@{
+    var nombre = "";
+    int idClien = -1;
+    if (Session["cliente"] != null && Session["idclien"] != null)
+    {
+        nombre = Session["cliente"].ToString();
+        idClien = Convert.ToInt32(Session["idclien"].ToString());
+    }
+}
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+@Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hola " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
-    </ul>
+<ul class="nav navbar-nav navbar-right">
+    <li>
+        <a class="btn" href="@Url.Action("Shopped","Carrito")">
+            <i class="glyphicon glyphicon-shopping-cart" style="font-size:24px; color:lightgoldenrodyellow;"></i>
+            <span class="badge" style="color:whitesmoke;">@num</span>
+        </a>
+    </li>
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:white;">
+            Hola @nombre !
+            <!-- @User.Identity.GetUserName()-->
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>@Html.ActionLink("Mi cuenta", "Edit", "Usuarios", new { id = idClien }, htmlAttributes: new { title = "Cambiar datos" })</li>
+            <li>@Html.ActionLink("Pedidos Entregados", "Index", "PedidoCompletado", new { idU = idClien }, htmlAttributes: new { title = "Pedidos Completados" })</li>
+            <li>@Html.ActionLink("Pedidos Pendientes", "Index", "PedidoPendiente", new { idU = idClien }, htmlAttributes: new { title = "Pedidos Pendientes" })</li>
+            <li>@Html.ActionLink("Mis quejas", "Index", "Comentarios", new { idU = idClien }, htmlAttributes: new { title = "Mis Quejas" })</li>
+        </ul>
+    </li>
+    <li><a href="javascript:document.getElementById('logoutForm').submit()" style="color:white;">Cerrar sesión</a></li>
+</ul>
     }
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Registrarse", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Iniciar sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+<ul class="nav navbar-nav navbar-right">
+    <li>
+        <a class="btn" href="@Url.Action("Shopped","Carrito")">
+            <i class="glyphicon glyphicon-shopping-cart" style="font-size:24px; color:lightgoldenrodyellow;"></i>
+            <span class="badge" style="color:whitesmoke;">@num</span>
+        </a>
+    </li>
+    <li><a href="@Url.Action("Register", "Account")" id="registerLink" style="color:white;">Registrarse</a></li>
+    <li><a href="@Url.Action("Login", "Account")" id="loginLink" style="color:white;">Iniciar Sesión</a></li>
+
+</ul>
 }

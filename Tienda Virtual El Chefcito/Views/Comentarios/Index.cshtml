@@ -1,0 +1,73 @@
+﻿@using Actividad3Vistas.Models;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .btn-info > a, .btn-warning > a {
+        text-decoration: none;
+        color: white;
+    }
+
+</style>
+<div class="container">
+    <br />
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <label class="panel-title"><b><i class="glyphicon glyphicon-list"></i> Mis Quejas</b></label>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            <strong>Título</strong>
+                        </th>
+                        <th>
+                            <strong>Fecha de la queja</strong>
+                        </th>
+                        <th>
+                            <strong>Estatus</strong>
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                @foreach (ListaComentariosUser lcu in ViewBag.miscomentarios)
+                {
+                    var fecha = lcu.comentario.fecha.ToShortDateString();
+                <tr>
+                    <td>
+                        @lcu.comentario.titulo
+                    </td>
+                    <td>
+                        @fecha
+                    </td>
+                    @if (lcu.comentario.estatus == 0)
+                    {
+                        <td class="text-danger"><strong>Sin responder</strong></td>
+                    }
+                    else
+                    {
+                        <td class="text-success"><strong>Queja respondida!</strong></td>
+                    }
+                    <td align="center">
+                        <button class="btn btn-warning">
+                            <i class="glyphicon glyphicon-edit"></i> @Html.ActionLink("Editar", "Edit2", new { id = lcu.comentario.id_comentario })
+                        </button>
+                    </td>
+                    <td align="center">
+                        <button class="btn btn-info">
+                            <i class="glyphicon glyphicon-eye-open"></i> @Html.ActionLink("Ver Queja", "Details", new { id = lcu.comentario.id_comentario })
+                        </button>
+                    </td>
+                </tr>
+                }
+            </table>
+
+        </div>
+    </div>
+</div>
+

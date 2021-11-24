@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "pagoProcesado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    a{
+        text-decoration: none;
+        color: white;
+    }
+</style>
+<div class="panel panel-success">
+    <div class="panel-heading">
+         <h2 class="panel-title"><b><i class="glyphicon glyphicon-ok-circle"></i> Pago Procesado</b></h2>
+    </div>
+    <div class="panel-body">
+        <center><strong>¡Su pago ha sido procesado con éxito!</strong></center>
+        <button class="btn btn-primary"><i class="glyphicon glyphicon-home"></i><a href="@Url.Action("Index", "Home")"> Ir a Home</a> </button>
+    </div>
+</div>
+

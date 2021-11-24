@@ -1,0 +1,58 @@
+﻿@using Actividad3Vistas.Models;
+@{
+    ViewBag.Title = "Pedidos Completados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    a {
+        text-decoration: none;
+        color: white;
+    }
+</style>
+<div class="container">
+    <div align="center">
+        <h2>Mis pedidos entregados</h2>
+    </div>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>No. de Pedido</th>
+                <th>Cantidad</th>
+                <th class="text-center">Fecha de Entrega</th>
+                <th class="text-center">Precio del producto</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ListaPedidoPendiente lpp in ViewBag.pedidoscomp)
+            {
+                var fechaEnt = lpp.envio.fecha_entrega.GetValueOrDefault().ToShortDateString();
+                <tr>
+                    <td class="col-md-2">
+                        <a class="thumbnail pull-left" href="#"> <img class="media-object" src="~/Content/img/products/@lpp.producto.imagen"> </a>
+                    </td>
+                    <td class="col-md-2">
+                        <strong>@lpp.ventas.id_venta</strong>
+                    </td>
+                    <td class="col-md-1 col-sm-1" style="text-align:center;">
+                       <strong>@lpp.ventas.cantidad</strong>
+                    </td>
+                    <td class="col-md-2 text-center">
+                        <strong>@fechaEnt</strong>
+                    </td>
+                    <td class="col-md-3 text-center">
+                        <strong>@lpp.ventas.precio_venta</strong>
+                    </td>
+                    <td class="col-md-2">
+                        <button class="btn btn-warning"><i class="glyphicon glyphicon-file"></i> <a href="@Url.Action("Create", "Comentarios", new { idVent = lpp.ventas.id_venta })"> Generar queja</a></button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="text-left">
+        <button class="btn btn-primary"><i class="glyphicon glyphicon-home"></i> <a href="@Url.Action("Index", "Home")"> Regresar al Home</a></button>
+    </div>
+</div>
+

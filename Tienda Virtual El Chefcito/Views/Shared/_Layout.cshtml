@@ -8,12 +8,17 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <style>
-        .nav.navbar-nav li a {
-            color: white;
+        body {
         }
 
-        .navbar-brand {
-            color: white !important;
+        footer {
+            background-color: #6e0516;
+            color: #ffffff;
+            height: 100px;
+        }
+
+        form {
+            margin-top: 8px;
         }
     </style>
 
@@ -46,6 +51,13 @@
                     <li>@Html.ActionLink("Inicio", "Index", "Home") </li>
                     <li>@Html.ActionLink("Acerca de", "About", "Home") </li>
                     <li>@Html.ActionLink("Contacto", "Contact", "Home") </li>
+                    <li>
+                        @using (Html.BeginForm("SearchProductByName", "Catalogo", FormMethod.Post, new { @class = "form-inline" }))
+                        {
+                        <input class="form-control" type="text" id="productName" name="productName" placeholder="Busque producto aqui" />
+                        <button class="btn btn-success" type="submit" value="submit">Buscar</button>
+                        }
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

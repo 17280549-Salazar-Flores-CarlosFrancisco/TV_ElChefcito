@@ -1,0 +1,129 @@
+﻿@model Actividad3Vistas.Models.Comentario
+
+@{
+    ViewBag.Title = "Detalles de la queja";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var fecha = ViewBag.comentario.fecha.ToShortDateString();
+    int id = Convert.ToInt32(Session["idclien"].ToString());
+}
+<style>
+    .btn-primary > a {
+        text-decoration: none;
+        color: white;
+    }
+
+    .btn-danger > a {
+        text-decoration: none;
+        color: white;
+    }
+    
+</style>
+<br />
+<div class="container">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <label class="panel-title"><b><i class="glyphicon glyphicon-info-sign"></i> Detalles de la queja</b></label>
+        </div>
+        <div class="panel-body">
+            <div align="center">
+                <table class="table table-bordered" style="width:600px;">
+                    <tr class="info">
+                        <td><strong>Título</strong></td>
+                        <td>@ViewBag.comentario.titulo</td>
+                    </tr>
+                    <tr class="info">
+                        <td><strong>Descripción</strong></td>
+                        <td>@ViewBag.comentario.descripcion</td>
+                    </tr>
+                    <tr class="info">
+                        <td><strong>Fecha de la queja</strong></td>
+                        <td>@fecha</td>
+                    </tr>
+                    <tr class="info">
+                        <td><strong>Estatus</strong></td>
+                        @if (ViewBag.comentario.estatus == 0)
+                        {
+                            <td class="text-danger"><strong>Sin responder!</strong></td>
+                        }
+                        else
+                        {
+                           <td class="text-success"><strong>Respondida!</strong></td>
+                        }
+                       
+                    </tr>
+                    <tr class="info">
+                        <td><strong>Respuesta</strong></td>
+                        <td class="text-justify">
+                            @ViewBag.comentario.respuesta
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div>
+        <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-arrow-left"></i> @Html.ActionLink("Regresar a Mis Quejas", "Index", new { idU = id})</button>
+    </div>
+</div>
+
+<!--
+    <div>
+    <h4>Comentario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.respuesta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.respuesta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ventas.id_venta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ventas.id_venta)
+        </dd>
+
+    </dl>
+</div>
+    <p>
+ 
+    @Html.ActionLink("Back to List", "Index")
+</p>
+-->

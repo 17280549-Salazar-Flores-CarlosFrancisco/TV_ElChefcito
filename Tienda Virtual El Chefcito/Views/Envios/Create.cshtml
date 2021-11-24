@@ -1,0 +1,127 @@
+﻿@model Actividad3Vistas.Models.Envios
+
+@{
+    ViewBag.Title = "Registrar datos de envío";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .btn-warning > a {
+        text-decoration: none;
+        color: white;
+    } 
+</style>
+<div class="container">
+    <br />
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h2 class="panel-title"><i class="glyphicon glyphicon-pencil"></i> Registrar datos de envío</h2>
+            </div>
+            <div class="panel-body">
+                <div class="panel-body">
+                    <div style="font-size:15px;">
+                        <b>Llene los campos con los datos solicitados, una vez que estos estén correctos dar clic en continuar para proceder al pago.</b>
+                    </div>
+                </div>
+                <div class="col-md-offset-4" >
+                    @using (Html.BeginForm("Create", "Envios", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-horizontal">
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group col-md-offset-2">
+                                @Html.LabelFor(model => model.contacto, "Nombre del destinatario", htmlAttributes: new { @class = "" })
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                    </div>
+                                    @Html.EditorFor(model => model.contacto, new { htmlAttributes = new { @class = "form-control", @pattern = "[A-Za-z ]{3,50}" , @required = "true"} })
+                                    @Html.ValidationMessageFor(model => model.contacto, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label( "Calle")
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="glyphicon glyphicon-globe"></i>
+                                    </div>
+                                    @Html.Editor("calle", new { htmlAttributes = new { @class = "form-control", @pattern = "[A-Za-z 0-9]{3,30}", @tittle = "Solo Acepta de 3 a 30 caracteres alfanúmericos", @required = "true" } })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="estado" name="estado">Seleccione el estado:</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="glyphicon glyphicon-flag"></i>
+                                    </div>
+                                    <select name="estado" class="form-control">
+                                        <option value="no">Seleccione uno...</option>
+                                        <option value="Aguascalientes">Aguascalientes</option>
+                                        <option value="Baja California">Baja California</option>
+                                        <option value="Baja California Sur">Baja California Sur</option>
+                                        <option value="Campeche">Campeche</option>
+                                        <option value="Chiapas">Chiapas</option>
+                                        <option value="Chihuahua">Chihuahua</option>
+                                        <option value="CDMX">Ciudad de México</option>
+                                        <option value="Coahuila">Coahuila</option>
+                                        <option value="Colima">Colima</option>
+                                        <option value="Durango">Durango</option>
+                                        <option value="Estado de México">Estado de México</option>
+                                        <option value="Guanajuato">Guanajuato</option>
+                                        <option value="Guerrero">Guerrero</option>
+                                        <option value="Hidalgo">Hidalgo</option>
+                                        <option value="Jalisco">Jalisco</option>
+                                        <option value="Michoacán">Michoacán</option>
+                                        <option value="Morelos">Morelos</option>
+                                        <option value="Nayarit">Nayarit</option>
+                                        <option value="Nuevo León">Nuevo León</option>
+                                        <option value="Oaxaca">Oaxaca</option>
+                                        <option value="Puebla">Puebla</option>
+                                        <option value="Querétaro">Querétaro</option>
+                                        <option value="Quintana Roo">Quintana Roo</option>
+                                        <option value="San Luis Potosí">San Luis Potosí</option>
+                                        <option value="Sinaloa">Sinaloa</option>
+                                        <option value="Sonora">Sonora</option>
+                                        <option value="Tabasco">Tabasco</option>
+                                        <option value="Tamaulipas">Tamaulipas</option>
+                                        <option value="Tlaxcala">Tlaxcala</option>
+                                        <option value="Veracruz">Veracruz</option>
+                                        <option value="Yucatán">Yucatán</option>
+                                        <option value="Zacatecas">Zacatecas</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="municipio" name="municipio">Ingrese el municipio</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="glyphicon glyphicon-map-marker"></i>
+                                    </div>
+                                    <input name="municipio" id="municipio" class="form-control input-sm" maxlength="30" type="text" pattern="[A-Za-z]{3,30}" title="Debe contener de 3 a 30 letras" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="codpost" name="codpost">Ingrese el código postal</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="glyphicon glyphicon-screenshot"></i>
+                                    </div>
+                                    <input name="codpost" id="codpost" class="form-control input-sm" maxlength="5" type="text" pattern="[0-9]{5}" title="Debe contener solo 5 números" required/>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div>
+                                    <button class="btn btn-success" type="submit" value="Create"><i class="glyphicon glyphicon-ok"></i> Finalizar Compra</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>    
+            </div>
+        </div>
+
+
+
+</div>

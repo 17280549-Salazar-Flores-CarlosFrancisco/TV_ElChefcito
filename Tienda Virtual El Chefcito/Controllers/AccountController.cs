@@ -79,6 +79,12 @@ namespace Tienda_Virtual_El_Chefcito.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                        string correo = model.Email;
+                        var query = (from n in db.Usuarios
+                                     where n.email == correo
+                                     select n).FirstOrDefault();
+                        Session["cliente"] = query.nombre;
+                        Session["idclien"] = query.id_usuario;
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -162,7 +168,17 @@ namespace Tienda_Virtual_El_Chefcito.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirmar cuenta", "Para confirmar la cuenta, haga clic <a href=\"" + callbackUrl + "\">aquí</a>");
-
+                     bool dominio = user.Email.ToString().Contains("@chefcito.com");
+                    if(dominio)
+                    {
+                        string correo = model.Email;
+                        return RedirectToAction("Index", "Compras", routeValues: new { email = correo });
+                    }
+                    else
+                    {
+                        Session["name"] = "";
+                        Session["correo"] = user.Email;
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

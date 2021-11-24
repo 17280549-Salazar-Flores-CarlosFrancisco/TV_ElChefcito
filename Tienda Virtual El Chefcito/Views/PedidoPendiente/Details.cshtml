@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int idC = Convert.ToInt32(Session["idclien"].ToString());
+    string fechEn = ViewBag.fechE;
+}
+<style>
+    a{
+        text-decoration: none;
+        color:white;
+    }
+</style>
+<div class="container">
+    <div class="panel panel-info" style="margin-top:30px;">
+        <div class="panel-heading">
+            <h2 class="panel-title"><i class="glyphicon glyphicon-info-sign"></i> Detalles del pedido seleccionado</h2>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Marca</th>
+                        <th>Descripción del producto</th>
+                        <th>Cantidad</th>
+                        <th>Fecha Estimada de Entrega</th>
+                        <th>Total</th>
+                        <th>Estatus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="~/Content/img/products/@ViewBag.detprod.imagen"> </a>
+                        </td>
+                        <td>
+                            @ViewBag.detprod.marca
+                        </td>
+                        <td>
+                            <p>@ViewBag.detprod.descripcion</p>
+                        </td>
+                        <td>
+                            @ViewBag.cant
+                        </td>
+                        @if ( fechEn.Equals("Sin fecha de entrega asignada"))
+                        {
+                            <td>Sin fecha programada</td>
+                        }
+                        else
+                        {
+                            <td>@ViewBag.fechE</td>
+                        }
+                        <td>
+                           @ViewBag.total
+                        </td>
+                        @if (fechEn.Equals("Sin fecha de entrega asignada"))
+                        {
+                            <td class="text-danger"><strong>En almacen</strong></td>
+                        }
+                        else
+                        {
+                            <td class="text-warning"><strong>En camino al destinatario</strong></td>
+                        }
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br />
+    <div class="text-left">
+        <button class="btn btn-primary"><i class="glyphicon glyphicon-arrow-left"></i><a href="@Url.Action("Index","PedidoPendiente", new { idU = idC })"> Regresar a Peidos Pendientes</a> </button>
+    </div>
+</div>
+

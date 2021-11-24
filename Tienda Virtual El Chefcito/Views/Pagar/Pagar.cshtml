@@ -1,0 +1,111 @@
+﻿@using Actividad3Vistas.Models
+@{
+    ViewBag.Title = "Pagar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="container">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <label class="panel-title"><b><i class="glyphicon glyphicon-exclamation-sign"></i> Ingrese los datos solicitados para pagar</b></label>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginForm("CreateOrder", "Pagar", FormMethod.Post))
+            {
+                    @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @Html.Label("Nombre del Titular")
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="glyphicon glyphicon-user"></i>
+                            </div>
+
+                            @Html.Editor("titular", new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.nombrecliente, @readonly = "readonly" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @Html.Label("Número de tarjeta")
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="glyphicon glyphicon-credit-card"></i>
+                            </div>
+                            @Html.Editor("digitos", new { htmlAttributes = new { @class = "form-control", @pattern = "[0-9]{16}", @tittle = "Solo se aceptan 16 digitos", @required = "true"} })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @Html.Label("Fecha Expiración")
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </div>
+                            @Html.Editor("fechaexp", new { htmlAttributes = new { @class = "form-control", @placeholder = "MM/YY" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @Html.Label("CVV")
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="glyphicon glyphicon-barcode"></i>
+                            </div>
+                            @Html.Editor("cvv", new { htmlAttributes = new { @class = "form-control", @type = "password", @pattern = "[0-9]{3}", @tittle = "Solo se aceptan 3 digitos", @required = "true" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @Html.Label("Correo electrónico")
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="glyphicon glyphicon-envelope"></i>
+                            </div>
+                            @Html.Editor("email", new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.emailcliente, @readonly = "readonly" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button class="btn btn-success" type="submit" value="Create"><i class="glyphicon glyphicon-credit-card"></i> Pagar</button>
+                    </div>
+                </div>
+            </div>
+            }
+
+        </div>
+    </div>
+    <div class="panel panel-warning">
+        <div class="panel-body">
+            <div align="center">
+                @{
+                    List<Item> cart = (List<Item>)Session["cart"];
+                    var total = cart.Sum(item => item.Producto.precio_venta * item.Cantidad);
+                }
+                <table class="table" style="width: 400px;">
+                    <tr>
+                        <td><strong>Subtotal:</strong></td>
+                        <td><strong>$@total</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Precio de envío:</strong></td>
+                        <td><strong>$200.00</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total:</strong></td>
+                        <td><strong>$@(total = total + 200)</strong></td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+

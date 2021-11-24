@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "CardDeclined";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    a{
+        color:white;
+        text-decoration:none;
+    }
+</style>
+<br />
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        <h2><b><i class="glyphicon glyphicon-alert"></i> Tarjeta Rechazada</b></h2>
+    </div>
+    <div class="panel-body">
+        <strong>Su método de pago no fue válido, por favor verifique los datos de su tarjeta o intente con otra.</strong>
+        <div>
+            <button class="btn btn-primary"><i class="glyphicon glyphicon-arrow-right"></i><a href="@Url.Action("Shopped","Carrito")"> Aceptar</a></button>
+        </div>
+    </div>
+</div>
+

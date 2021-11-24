@@ -1,0 +1,88 @@
+﻿@model Actividad3Vistas.Models.Usuarios
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    a{
+        text-decoration:none;
+        color:white;
+    }
+</style>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+ <div class="panel panel-primary" style="margin-top:20px;">
+     <div class="panel-heading">
+         <div class="panel-title"><i class="glyphicon glyphicon-pencil"></i> Editar información del cliente</div>
+     </div>
+     <div class="panel-body">
+         <div class="form-horizontal">
+             <hr />
+             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+             @Html.HiddenFor(model => model.id_usuario)
+
+             <div class="form-group">
+                 @Html.LabelFor(model => model.nombre, "Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
+                 <div class="col-md-10">
+                     @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", @readonly = "readonly" })
+                     @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                 </div>
+             </div>
+
+             <div class="form-group">
+                 @Html.LabelFor(model => model.apellidos, "Apellidos", htmlAttributes: new { @class = "control-label col-md-2" })
+                 <div class="col-md-10">
+                     @Html.TextBoxFor(model => model.apellidos, new { @class = "form-control", @readonly = "readonly" })
+                     @Html.ValidationMessageFor(model => model.apellidos, "", new { @class = "text-danger" })
+                 </div>
+             </div>
+
+             <div class="form-group">
+                 @Html.LabelFor(model => model.email, "Email", htmlAttributes: new { @class = "control-label col-md-2" })
+                 <div class="col-md-10">
+                     @Html.TextBoxFor(model => model.email, new { @class = "form-control", @readonly = "readonly" })
+                     @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                 </div>
+             </div>
+
+             <div class="form-group">
+                 @Html.LabelFor(model => model.telefono, "Teléfono", htmlAttributes: new { @class = "control-label col-md-2" })
+                 <div class="col-md-10">
+                     @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { @class = "form-control" } })
+                     @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
+                 </div>
+             </div>
+
+             <div class="form-group">
+                 @Html.LabelFor(model => model.rol, htmlAttributes: new { @class = "control-label col-md-2", @hidden = "hidden" })
+                 <div class="col-md-10">
+                     @Html.TextBoxFor(model => model.rol, new { @class = "form-control", @readonly = "readonly", @type = "hidden" })
+                     @Html.ValidationMessageFor(model => model.rol, "", new { @class = "text-danger" })
+                 </div>
+             </div>
+
+             <div class="form-group">
+                 @Html.LabelFor(model => model.estatus, htmlAttributes: new { @class = "control-label col-md-2", @hidden = "hidden" })
+                 <div class="col-md-10">
+                     @Html.TextBoxFor(model => model.estatus, new { @class = "form-control", @readonly = "readonly", @type = "hidden" })
+                     @Html.ValidationMessageFor(model => model.estatus, "", new { @class = "text-danger" })
+                 </div>
+             </div>
+
+             <div class="form-group">
+                 <div class="col-md-offset-2 col-md-10">
+                     <button class="btn btn-success" type="submit" value="Save"><i class="glyphicon glyphicon-edit"></i> Guardar</button>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+}
+
+<div>
+    <button class="btn btn-warning"><i class="glyphicon glyphicon-home"></i> @Html.ActionLink("Regresar al Home", "Index","Home")</button>
+</div>
