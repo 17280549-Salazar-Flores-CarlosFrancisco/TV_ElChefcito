@@ -1,0 +1,95 @@
+﻿@model Almacenista.Models.Envios
+
+@{
+    ViewBag.Title = "Detalles de Envíos";
+    Layout = "~/Views/Shared/_LayoutAlmacenista.cshtml";
+}
+
+<h2>Detalles del Envío</h2>
+<style>
+
+    .btn-primary > a {
+        text-decoration: none;
+        color: white;
+    }
+
+    .btn-warning > a {
+        text-decoration: none;
+        color: white;
+    }
+
+    .btn-danger > a {
+        text-decoration: none;
+        color: white;
+    }
+</style>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h4>Envío</h4>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-hover table-bordered" style="background-color:azure">
+            <tr>
+                <th>
+                    Número de Orden
+                </th>
+                <th>
+                    Contacto
+                </th>
+                <th>
+                    Número de guía
+                </th>
+                <th>
+                    Dirección
+                </th>
+                <th>
+                    Estado
+                </th>
+                <th>
+                    Fecha de Envío
+                </th>
+                <th>
+                    Fecha de Entrega
+                </th>
+                <th>
+                    Paquetería
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayFor(model => model.id_envio)
+                </th>
+                <th>
+                    @Html.DisplayFor(model => model.contacto)
+                </th>
+                <th>
+                    @Html.DisplayFor(model => model.numero_guia)
+                </th>
+                <th>
+                    @Html.DisplayFor(model => model.direccion)
+                </th>
+                <th>
+                    @Html.DisplayFor(model => model.estatus)
+                </th>
+                <th>
+                    @Html.DisplayFor(model => model.fecha_envio)
+                </th>
+                <th>
+                    @Html.DisplayFor(model => model.fecha_entrega)
+                </th>
+                <th>
+                    @Html.DisplayFor(model => model.Paqueterias.nombre)
+                </th>
+
+            </tr>
+            </table>
+        </div>
+    </div>
+<p class="text-center">
+    
+    <span>
+        <button class="btn btn-primary btn-sm">
+            <span class="glyphicon glyphicon-backward"></span>@Html.ActionLink("Ver Paqueterías", "Index2")
+        </button>
+    </span>
+</p>
