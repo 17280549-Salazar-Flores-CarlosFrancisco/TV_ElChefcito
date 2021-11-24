@@ -1,2 +1,5 @@
+Tienda Virtual El Chefcito/obj/*
 Tienda Virtual El Chefcito/App_Data/*
 *.lock
+*.suo
+*.ide
