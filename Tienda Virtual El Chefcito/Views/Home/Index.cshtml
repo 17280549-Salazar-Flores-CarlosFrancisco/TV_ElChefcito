@@ -1,102 +1,52 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@{
+    ViewBag.Title = "Home Page";
 }
 
-<h2>¡Bienvenido(a) a nuestro extenso catálogo!</h2>
-
-<div class="container" style="padding-top: 10px;">
-    <form class="navbar-form navbar-right" role="search">
-        <div class="form-group">
-            <select class="form-control" id="sel1">
-                <option>Filtrar Productos...</option>
-                <option>Categoría</option>
-                <option>Subcategoría</option>
-                <option>Producto</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Buscar...">
-        </div>
-        <input class="btn btn-default" type="button" value="Ir" onclick="location.href='@Url.Action("Index", "Buscar")'" />
-    </form>
+<div class="jumbotron jumbotron-fluid" style="background-image: url(https://d2w1ef2ao9g8r9.cloudfront.net/images/_1600x1066_crop_center-center_82_line/Restaurant-equipment.jpg?mtime=20200527162459&focal=none&tmtime=20210624224643); background-repeat: no-repeat; background-attachment: fixed; color: white !important; height: 340px; ">
+    <div class="container">
+        <h1 class="display-2">Revisa nuestra gran variedad de productos</h1>
+        <p class="lead">Los mejores precios</p>
+        <input class="btn btn-primary" type="button" value="Ir a la tienda" onclick="location.href='@Url.Action("Index", "Tienda")'" />
+    </div>
 </div>
-<br />
-<div class="container" style="padding-top: 10px;">
+
+<div class="container">
     <div class="row">
-        <div class="col-xs-3">
+        <div class="col-xs-4">
             <div>
-                <div class="panel panel-default" style="text-align: center; padding: 10px; background-color: lemonchiffon;">
+                <div class="panel panel-default" style="text-align: center; padding: 10px;">
                     <div class="panel-body">
-                        <h3>Producto1</h3>
-                        <a href="@Url.Action("Index", "Producto")">
-                            <img class="img-responsive rounded border-0" src="~/Content/img/Cate1.jpg" />
-                        </a>
-                        <p style="padding-top: 10px;">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </p>
-                        <div class="row">
-                            <a class="btn btn-primary" href="http://site/">Comprar</a>
-                            <a class="btn btn-success" href="http://site">Añadir Carrito</a>
-                        </div>
+                        <h2>¡Revisa nuestros 2X1!</h2>
+                        <img class="img-responsive" src="~/Content/img/Panel1.png" />
+                        <h3>
+                            Como en las heladerías, todos los jueves tenemos al 2x1 todos los vasos de helado
+                        </h3>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xs-3">
+        <div class="col-xs-4">
             <div>
-                <div class="panel panel-default" style="text-align: center; padding: 10px; background-color: lemonchiffon;">
+                <div class="panel panel-default" style="text-align: center; padding: 10px;">
                     <div class="panel-body">
-                        <h3>Producto2</h3>
-                        <a href="@Url.Action("Index", "Producto")">
-                            <img class="img-responsive rounded border-0" src="~/Content/img/Cate2.jpg" />
-                        </a>
-                        <p style="padding-top: 10px;">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </p>
-                        <div class="row">
-                            <a class="btn btn-primary" href="http://site/">Comprar</a>
-                            <a class="btn btn-success" href="http://site">Añadir Carrito</a>
-                        </div>
+                        <h2>¡Al mayoreo!</h2>
+                        <img class="img-responsive" src="~/Content/img/Panel2.png" />
+                        <h3>
+                            Contamos con precios de mayoreo y diferentes ofertas según tu volumen de compra
+                        </h3>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xs-3">
+        <div class="col-xs-4">
             <div>
-                <div class="panel panel-default" style="text-align: center; padding: 10px; background-color: lemonchiffon;">
+                <div class="panel panel-default" style="text-align: center; padding: 10px;">
                     <div class="panel-body">
-                        <h3>Producto3</h3>
-                        <a href="@Url.Action("Index", "Producto")">
-                            <img class="img-responsive rounded border-0" src="~/Content/img/Cate3.jpg" />
-                        </a>
-                        <p style="padding-top: 10px;">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </p>
-                        <div class="row">
-                            <a class="btn btn-primary" href="http://site/">Comprar</a>
-                            <a class="btn btn-success" href="http://site">Añadir Carrito</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-3">
-            <div>
-                <div class="panel panel-default" style="text-align: center; padding: 10px; background-color: lemonchiffon;">
-                    <div class="panel-body">
-                        <h3>Producto4</h3>
-                        <a href="@Url.Action("Index", "Producto")">
-                            <img class="img-responsive rounded border-0" src="~/Content/img/Cate4.jpg" />
-                        </a>
-                        <p style="padding-top: 10px;">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </p>
-                        <div class="row">
-                            <a class="btn btn-primary" href="http://site/">Comprar</a>
-                            <a class="btn btn-success" href="http://site">Añadir Carrito</a>
-                        </div>
+                        <h2>¡Oferta del mes!</h2>
+                        <img class="img-responsive" src="~/Content/img/Panel3.png" />
+                        <h3>
+                            Todo este mes de noviembre, todos nuestros cuchillos tienen un 15% de descuento
+                        </h3>
                     </div>
                 </div>
             </div>

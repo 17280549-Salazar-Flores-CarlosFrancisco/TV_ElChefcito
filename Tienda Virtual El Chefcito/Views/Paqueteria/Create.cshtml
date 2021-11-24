@@ -1,0 +1,145 @@
+﻿@model Almacenista.Models.Paqueterias
+
+@{
+    ViewBag.Title = "Crear Paquetería";
+    Layout = "~/Views/Shared/_LayoutAlmacenista.cshtml";
+}
+
+<h2>Crear Paquetería</h2>
+<style>
+
+    .btn-primary > a {
+        text-decoration: none;
+        color: white;
+    }
+
+    .btn-warning > a {
+        text-decoration: none;
+        color: white;
+    }
+
+    .btn-danger > a {
+        text-decoration: none;
+        color: white;
+    }
+</style>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h4>Paqueterías</h4>
+    </div>
+    <div class="panel-body">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-offset-2">
+                    @Html.LabelFor(model => model.nombre, "Ingrese el nombre:", htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-offset-2">
+                    @Html.LabelFor(model => model.razon_social, "Razón Social:", htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.razon_social, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.razon_social, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-offset-2">
+                    @Html.LabelFor(model => model.rfc, "Ingrese RFC:",htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.rfc, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.rfc, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-offset-2">
+                    @Html.LabelFor(model => model.pagina_web, "Ingrese la página web:",htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.pagina_web, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.pagina_web, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-offset-2">
+                    @Html.LabelFor(model => model.direccion, "Ingrese la dirección:",htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.direccion, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.direccion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-offset-2">
+                    @Html.LabelFor(model => model.telefono, "Ingrese le teléfono:",htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-offset-2">
+                    @Html.LabelFor(model => model.estatus, "Seleccione el estado:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.RadioButtonFor(model => model.estatus, "1")<label for="1">Activo</label>
+                        @Html.ValidationMessageFor(model => model.estatus, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.RadioButtonFor(model => model.estatus, "0")<label for="1">Inactivo</label>
+                        @Html.ValidationMessageFor(model => model.estatus, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-md-7">
+                        <button type="submit" value="Create" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Crear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="text-center">
+        <span>
+            <button class="btn btn-primary btn-sm">
+                <span class="glyphicon glyphicon-backward"></span>@Html.ActionLink("Ver Paqueterías", "Index")
+            </button>
+        </span>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
